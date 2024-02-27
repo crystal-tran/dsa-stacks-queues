@@ -28,6 +28,8 @@ class StackStr {
     this.head = null;
     this.tail = null;
     this.length = 0;
+
+    for (const i of initial) this.push(i);
   }
 
   /** push(val): add val to top. Returns undefined. */
@@ -35,19 +37,20 @@ class StackStr {
     const newNode = new NodeStr(val);
     // newNode = b
 
-    if(this.length === 0){
+    if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
-      // this.length += 1;
+      this.length += 1;
+      // console.log(this.length);
     } else {
 
-    // ["b", "c"]
+      // ["b", "c"]
 
-    newNode.next = this.head;
-    this.head = newNode;
-    this.length += 1;
-    // console.log("push head:", this.head);
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length += 1;
     }
+    console.log("head", this.head, "next:", );
   }
 
   /** pop(): remove and return item from top.
@@ -65,28 +68,23 @@ class StackStr {
       this.tail = null;
       this.length -= 1;
 
-      return returnedVal;
-    }
+      // return returnedVal;
+    } else {
 
-    let current = this.head;
-
-
-    while (current.next !== null){
-
-      if (current.next === this.tail){
-
-        returnedVal = this.tail!.val
-        this.tail = current;
-
-      }
-      current = current!.next!
-    }
+    returnedVal = this.head.val;
+    this.head = this.head.next;
     this.length -= 1;
-    return returnedVal!;
+    }
+
+    return returnedVal;
+
   }
 
   /** peek(): return the value of first item. */
   peek():string {
+    if(this.length === 0){
+      throw new IndexError;
+    }
     return this.head!.val;
   }
 
