@@ -29,6 +29,8 @@ class QueueStr {
     this.head = null;
     this.tail = null;
     this.length = 0;
+
+    for (const i of initial) this.enqueue(i);
   }
 
   /** enqueue(val): add val to end. Returns undefined. */
@@ -39,11 +41,12 @@ class QueueStr {
       this.head = newNode;
       this.tail = newNode;
       this.length += 1;
-    }
+    } else {
 
     this.tail!.next = newNode;
     this.tail = newNode
     this.length += 1;
+    }
   }
 
   /** dequeue(): remove & return item from start.
@@ -53,21 +56,34 @@ class QueueStr {
       throw new IndexError;
     }
 
+    let returnedVal : string | null = null;
+    returnedVal = this.head!.val;
+
     if(this.length === 1){
       this.head = null;
       this.tail = null;
-      this.length -= 1;
+    } else {
+      this.head = this.head!.next;
     }
+
+    this.length -=1;
+    return returnedVal
+
   }
 
   /** peek(): return the value of top. */
   peek(): string {
-    return "x";
+    if(this.length === 0){
+      throw new IndexError;
+    }
+
+    return this.head!.val;
   }
 
   /** peek(): return the value of top. */
   isEmpty(): boolean {
-    return false;
+    console.log("this.length:", this.length);
+    return (this.length === 0);
   }
 }
 
