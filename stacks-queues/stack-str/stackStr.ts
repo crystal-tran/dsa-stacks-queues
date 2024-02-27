@@ -33,10 +33,12 @@ class StackStr {
   /** push(val): add val to top. Returns undefined. */
   push(val: string): void {
     const newNode = new NodeStr(val);
+    // newNode = b
 
     if(this.length === 0){
       this.head = newNode;
       this.tail = newNode;
+      this.length += 1;
     }
 
     // ["b", "c"]
@@ -44,6 +46,7 @@ class StackStr {
     newNode.next = this.head;
     this.head = newNode;
     this.length += 1;
+    // console.log("push head:", this.head);
 
   }
 
@@ -55,27 +58,30 @@ class StackStr {
     }
 
     let returnedVal : string | null = null;
-
+    //[a, b]
     if(this.length === 1){
       returnedVal = this.head.val;
       this.head = null;
       this.tail = null;
       this.length -= 1;
+
       return returnedVal;
     }
 
     let current = this.head;
 
+
     while (current.next !== null){
+
       if (current.next === this.tail){
+
         returnedVal = this.tail!.val
         this.tail = current;
+
       }
       current = current!.next!
     }
-
     this.length -= 1;
-
     return returnedVal!;
   }
 
@@ -84,7 +90,7 @@ class StackStr {
     if (this.length === 0){
       throw new IndexError
     }
-    return "x";
+    return this.head!.val;
   }
 
   /** peek(): return the value of top. */
