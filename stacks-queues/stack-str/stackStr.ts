@@ -38,8 +38,8 @@ class StackStr {
     if(this.length === 0){
       this.head = newNode;
       this.tail = newNode;
-      this.length += 1;
-    }
+      // this.length += 1;
+    } else {
 
     // ["b", "c"]
 
@@ -47,7 +47,7 @@ class StackStr {
     this.head = newNode;
     this.length += 1;
     // console.log("push head:", this.head);
-
+    }
   }
 
   /** pop(): remove and return item from top.
@@ -87,19 +87,13 @@ class StackStr {
 
   /** peek(): return the value of first item. */
   peek():string {
-    if (this.length === 0){
-      throw new IndexError
-    }
     return this.head!.val;
   }
 
   /** peek(): return the value of top. */
   isEmpty():boolean {
-    if (this.length === 0){
-      return true;
-    }
-    return false;
-  }
+    return this.length === 0;
+ }
 }
 
 
